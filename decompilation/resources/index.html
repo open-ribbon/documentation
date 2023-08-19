@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="Team Open-Ribbon">
+    
+    <link rel="shortcut icon" href="../../img/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Resources and Setup - Open-Ribbon's Vib-Ribbon Technical Database</title>
+    <link href="../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Resources and Setup", url: "#_top", children: [
+              {title: "How to decompile", url: "#how-to-decompile" },
+              {title: "How to extract PAK files", url: "#how-to-extract-pak-files" },
+              {title: "How to edit TMDs, ANMs, and ANCs", url: "#how-to-edit-tmds-anms-and-ancs" },
+              {title: "How to edit Audio files", url: "#how-to-edit-audio-files" },
+              {title: "How to edit obstacle data", url: "#how-to-edit-obstacle-data" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../main_t/globals/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../main_t/globals/" class="btn btn-xs btn-link">
+        Globals
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../file-ext/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../file-ext/" class="btn btn-xs btn-link">
+        File Extraction
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h1 id="resources-and-setup">Resources and Setup</h1>
+<h2 id="how-to-decompile">How to decompile</h2>
+<p>If you wanna help us research the game, and even reverse engineer, you will need the following things:</p>
+<ul>
+<li>Basic C and C++ knowledge</li>
+<li>A disassembler (IDA Pro or Ghidra is recommended)</li>
+</ul>
+<h3 id="instructions-for-ghidra">Instructions for Ghidra</h3>
+<p>You will need <strong>Ghidra 10.3.1</strong> specifically, as any other version is either confirmed or speculated not to work. A plugin is also needed to read PSX binaries, which can be found <a href="https://github.com/lab313ru/ghidra_psx_ldr/releases/tag/v6.7">here</a>. After you have extracted the archive, open Ghidra, navigate to <code>File -&gt; Install Extensions</code> in the main menu, and install the extension.</p>
+<h3 id="instructions-for-ida-pro">Instructions for IDA Pro</h3>
+<p>(WIP)</p>
+<ul>
+<li>Obtain the IDB file</li>
+<li>Install the psyq plugin</li>
+<li>Ignore <code>"psyq450: dir not found"</code> error</li>
+</ul>
+<h2 id="how-to-extract-pak-files">How to extract PAK files</h2>
+<p>You will need a tool called VibRipper, which can be found in <a href="https://github.com/resistiv/VibRipper/">this GitHub repository</a>, courtesy of Resistiv. To use this tool, the executable will need to be placed in the same folder or directory as the PAK file you want to extract.</p>
+<p>After this, run the extract command, <code>./VibRipper.exe u 01_FILES.PAK EXTRACTED_FILES</code> for example. (Append <code>mono</code> to the beginning in the case of Linux.) In this case, all the extracted files should be in EXTRACTED_FILES. If you wish to edit the files that you extracted, follow the other sections on this page accordingly.</p>
+<h2 id="how-to-edit-tmds-anms-and-ancs">How to edit TMDs, ANMs, and ANCs</h2>
+<p>There are two currently known methods to edit models and animations. One uses Blender and the other uses LightWave.</p>
+<h3 id="blender-instructions">Blender Instructions</h3>
+<p>If you want to export the animations on Blender, you can use a tool created by []Murugo](https://github.com/Murugo/), who created a custom addon that can work with Vib-Ribbon's animation and model files; however the plugin was designed for Blender 2.8.x and as such will only work in that version range alone.</p>
+<p>For further instructions, visit the <a href="https://github.com/Murugo/Misc-Game-Research/tree/main/PS1/Vib-Ribbon">repository for the plugin</a>.</p>
+<h3 id="lightwave-instructions">LightWave Instructions</h3>
+<p>(WIP)
+It was discovered that LightWave was the tool used to create the original files, so naturally, there are methods to work with the models and animations here as well. You can get LightWave <a href="https://lightwave3d.com//try_lightwave/">at this link</a>.</p>
+<h2 id="how-to-edit-audio-files">How to edit Audio files</h2>
+<p>There is not a currently known way to edit the audio of Vib-Ribbon, but there will likely be one eventually. Looking at different SDKs will likely have some answers.</p>
+<h3 id="extracting-the-audios">Extracting the audios</h3>
+<p>This is a simple process, and requires the use of PSound. <a href="https://cdn.discordapp.com/attachments/1141802613231337522/1141803662734274560/PSound.exe">You can download PSound by following this link.</a> Browse the folders with audio such as <code>GAME/AUDIO/PSJ_SE.VB</code>, <code>KIOSK/AUDIO/PSJ_SE.VB</code>, or <code>TITLE/AUDIO/PSJ_SE.VB</code>. Each piece of audio tends to be played at different speeds because sample rates vary across them. To export, you can convert them as WAV in the File Tab.</p>
+<h2 id="how-to-edit-obstacle-data">How to edit obstacle data</h2>
+<p>This one is still in the works... You can help us out by analyzing the <code>SCRIPT/SYSTEM3.FSL</code> file! <em>After extraction of course.</em></p>
+
+  <br>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../main_t/globals/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../main_t/globals/" class="btn btn-xs btn-link">
+        Globals
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../file-ext/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../file-ext/" class="btn btn-xs btn-link">
+        File Extraction
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="container-fluid wm-page-content">
+  <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>
