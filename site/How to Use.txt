@@ -1,0 +1,1 @@
+To put it simply, each page is a Markdown file. Edit it as you would normally. To add it to the navigation, edit mkdocs.yml.

@@ -14,3 +14,12 @@ nav:
 - Index: "index.md"
 - Decompilation:
   - File Extraction: "decompilation/file-ext.md"
+  - Setting Up Environment: "decompilation/setup.md"
+- File Types:
+  - Introduction to File Types: "file-types/intro.md"
+  - ANC - Camera Animation: "file-types/anc.md"
+  - ANM - Model Animation: "file-types/anm.md"
+  - FSL - Obstacle Course Data: "file-types/fsl.md"
+  - TIM - PlayStation Image: "file-types/tim.md"
+  - TMD - PlayStation Model: "file-types/tmd.md"
+  - VB/VH - PlayStation Audio: "file-types/vb-vh.md"
