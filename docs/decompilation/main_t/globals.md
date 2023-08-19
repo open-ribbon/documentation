@@ -1,5 +1,9 @@
 Here are some of the globals found in MAIN_T.EXE, the title executable. These globals are saved as 4-byte DWORDS, usually as either values or pointers to game functions, in the console's memory during execution.
 ### PAL
+None yet.
+
+<!---
+*Included by PSYQ*
 ```
 printf                 = "0x80030674";  // Print formatted output
 exit                   = "0x80030914";  // Terminate a program normally
@@ -17,3 +21,4 @@ rsin                   = "0x80035FDC";  // Finds the sine function of the angle
 HWD0                   = "0x800481E8";  // Horizontal resolution
 VWD0                   = "0x800481EC";  // Vertical resolution
 ```
+-->
