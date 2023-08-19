@@ -17,7 +17,7 @@ nav:
 - Index: "index.md"
 - Decompilation:
   - File Extraction: "decompilation/file-ext.md"
-  - Setting Up Environment: "decompilation/setup.md"
+  - Resources and Setup: "decompilation/resources.md"
   - MAIN_T.EXE:
     - Globals: "decompilation/main_t/globals.md"
 - File Types:
