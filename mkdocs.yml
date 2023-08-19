@@ -1,0 +1,14 @@
+site_name: "Open-Ribbon's Vib-Ribbon Technical Database"
+site_description: 'Documenting technical information about Vib-Ribbon for the Sony PlayStation.'
+site_author: 'Team Open-Ribbon'
+
+theme:
+  name: null
+  custom_dir: mkdocs_windmill
+  # Copy settings from mkdocs_theme.yml, which is ignored by custom_dir themes.
+  static_templates: [404.html]
+  search_index_only: true
+  include_search_page: true
+
+nav:
+- Index: "index.md"
