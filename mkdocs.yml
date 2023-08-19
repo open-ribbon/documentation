@@ -12,3 +12,5 @@ theme:
 
 nav:
 - Index: "index.md"
+- Decompilation:
+  - File Extraction: "decompilation/file-ext.md"

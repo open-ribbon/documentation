@@ -2,7 +2,7 @@
 
 Welcome to Open-Ribbon's Vib-Ribbon Technical Database! This documentation is currently under construction, so as a result, many things about it will change over time, whether it be the information provided or the visual and technical aspects of the repository. This info repository was made by the [Open-Ribbon server](https://discord.gg/cXVGPEmXK4), a server dedicated to decompiling and researching Vib-Ribbon for the Sony PlayStation.
 
-Additionally, for full documentation on the wiki engine, MkDocs, visit [here](https://www.mkdocs.org).
+Additionally, for full documentation on the documentation engine, MkDocs, visit [here](https://www.mkdocs.org).
 
 ## What is Vib-TD?
 
