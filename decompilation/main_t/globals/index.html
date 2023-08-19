@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="Team Open-Ribbon">
+    
+    <link rel="shortcut icon" href="../../../img/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Globals - Open-Ribbon's Vib-Ribbon Technical Database</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "PAL", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../../../file-types/intro/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../../../file-types/intro/" class="btn btn-xs btn-link">
+        Introduction to File Types
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../../setup/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../../setup/" class="btn btn-xs btn-link">
+        Setting Up Environment
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <p>Here are some of the globals found in MAIN_T.EXE, the title executable. These globals are saved as 4-byte DWORDS, usually as either values or pointers to game functions, in the console's memory during execution.</p>
+<h3 id="pal">PAL</h3>
+<pre><code>printf                 = &quot;0x80030674&quot;;  // Print formatted output
+exit                   = &quot;0x80030914&quot;;  // Terminate a program normally
+SwEnterCriticalSection = &quot;0x80030924&quot;;  // uppresses interrupts
+SwExitCriticalSection  = &quot;0x80030480&quot;;  // Enables interrupts
+SpuQuit                = &quot;0x80033184&quot;;  // Terminates SPU processing
+SpuIsTransferCompleted = &quot;0x800330D4&quot;;  // Checks whether transfer is completed or waits for completion
+InitClip               = &quot;0x80035E1C&quot;;  // Initialize clipping parameter
+ResetGraph             = &quot;0x8002CDE8&quot;;  // Initialize drawing engine
+FntFlush               = &quot;0x8002F724&quot;;  // Draw contents of print stream
+Clip3F                 = &quot;0x80035CAC&quot;;  // Three-vertex clipping functions
+GsSetProjection        = &quot;0x80035DFC&quot;;  // Set the projection plane position
+rcos                   = &quot;0x80035F3C&quot;;  // Finds the cosine function of the angle
+rsin                   = &quot;0x80035FDC&quot;;  // Finds the sine function of the angle
+HWD0                   = &quot;0x800481E8&quot;;  // Horizontal resolution
+VWD0                   = &quot;0x800481EC&quot;;  // Vertical resolution
+</code></pre>
+
+  <br>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../../../file-types/intro/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../../../file-types/intro/" class="btn btn-xs btn-link">
+        Introduction to File Types
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../../setup/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../../setup/" class="btn btn-xs btn-link">
+        Setting Up Environment
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="container-fluid wm-page-content">
+  <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>
