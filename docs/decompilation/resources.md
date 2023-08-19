@@ -30,7 +30,7 @@ After this, run the extract command, `./VibRipper.exe u 01_FILES.PAK EXTRACTED_F
 There are two currently known methods to edit models and animations. One uses Blender and the other uses LightWave.
 
 ### Blender Instructions
-If you want to export the animations on Blender, you can use a tool created by []Murugo](https://github.com/Murugo/), who created a custom addon that can work with Vib-Ribbon's animation and model files; however the plugin was designed for Blender 2.8.x and as such will only work in that version range alone.
+If you want to export the animations on Blender, you can use a tool created by [Murugo](https://github.com/Murugo/), who created a custom addon that can work with Vib-Ribbon's animation and model files; however the plugin was designed for Blender 2.8.x and as such will only work in that version range alone.
 
 For further instructions, visit the [repository for the plugin](https://github.com/Murugo/Misc-Game-Research/tree/main/PS1/Vib-Ribbon).
 
