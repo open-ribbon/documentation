@@ -2,6 +2,9 @@ site_name: "Open-Ribbon's Vib-Ribbon Technical Database"
 site_description: 'Documenting technical information about Vib-Ribbon for the Sony PlayStation.'
 site_author: 'Team Open-Ribbon'
 
+markdown_extensions:
+  - tables
+
 theme:
   name: null
   custom_dir: mkdocs_windmill
@@ -15,11 +18,14 @@ nav:
 - Decompilation:
   - File Extraction: "decompilation/file-ext.md"
   - Setting Up Environment: "decompilation/setup.md"
+  - MAIN_T.EXE:
+    - Globals: "decompilation/main_t/globals.md"
 - File Types:
   - Introduction to File Types: "file-types/intro.md"
   - ANC - Camera Animation: "file-types/anc.md"
   - ANM - Model Animation: "file-types/anm.md"
   - FSL - Obstacle Course Data: "file-types/fsl.md"
+  - PAK - Vib-Ribbon Archive: "file-types/pak.md"
   - TIM - PlayStation Image: "file-types/tim.md"
   - TMD - PlayStation Model: "file-types/tmd.md"
   - VB/VH - PlayStation Audio: "file-types/vb-vh.md"
