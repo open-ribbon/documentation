@@ -1,7 +1,7 @@
 # Resources and Setup
 
 ## How to decompile
-If you wanna help us research the game, and even reverse engineer, you will need the following things:
+If you want to help us research the game, and even reverse engineer, you will need the following things:
 
 * Basic C and C++ knowledge
 * A disassembler (IDA Pro or Ghidra is recommended)
@@ -44,9 +44,9 @@ It was discovered that LightWave was the tool used to create the original files,
 There is not a currently known way to edit the audio of Vib-Ribbon, but there will likely be one eventually. Looking at different SDKs will likely have some answers.
 
 ### Extracting the audios
-This is a simple process, and requires the use of PSound. [You can download PSound by following this link.](https://cdn.discordapp.com/attachments/1141802613231337522/1141803662734274560/PSound.exe) Browse the folders with audio such as `GAME/AUDIO/PSJ_SE.VB`, `KIOSK/AUDIO/PSJ_SE.VB`, or `TITLE/AUDIO/PSJ_SE.VB`. Each piece of audio tends to be played at different speeds because sample rates vary across them. To export, you can convert them as WAV in the File Tab.
+This is a simple process, and requires the use of PSound. [You can download PSound by following this link.](https://cdn.discordapp.com/attachments/1141802613231337522/1141803662734274560/PSound.exe). Browse the folders with audio such as `GAME/AUDIO/PSJ_SE.VB`, `KIOSK/AUDIO/PSJ_SE.VB`, or `TITLE/AUDIO/PSJ_SE.VB`. Each piece of audio tends to be played at different speeds because sample rates vary across them. To export, you can convert them as WAV in the File Tab.
 
 
 
 ## How to edit obstacle data
-This one is still in the works... You can help us out by analyzing the `SCRIPT/SYSTEM3.FSL` file! *After extraction of course.*
+This one is still in the works... You can help us out by analyzing the `SCRIPT/SYSTEM3.FSL` file! *After extraction, of course.*
