@@ -1,7 +1,7 @@
 # Resources and Setup
 
 ## How to decompile
-If you wan to help us research the game, and even reverse engineer, you will need the following things:
+If you want to help us research the game, and even reverse engineer, you will need the following things:
 
 * Basic C and C++ knowledge
 * A disassembler (IDA Pro or Ghidra is recommended)
