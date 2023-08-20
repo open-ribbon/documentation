@@ -44,7 +44,7 @@ When unpacking PAK files, VibRipper will make a text file that'll be needed to m
 
 
 ## Making a BIN/ISO file
-Earlier, I mentioned MKPSXISO, which is what we'll be using to make the bin/iso file. We'll use the xml file DUMPSXISO created earlier. Simply run the program through CMD and specify the xml file. EX: ``mkpsxiso.exe rebuild.xml``  You'll get a new bin+cue file named mkpsxiso.bin/.cue. Consider editing the xml file to change the name of the bin+cue file names. Also consider editing the cue file if you wanna include your own music to the game.
+Earlier, I mentioned MKPSXISO, which is what we'll be using to make the bin/iso file. We'll use the xml file DUMPSXISO created earlier. Simply run the program through CMD and specify the xml file. EX: ``mkpsxiso.exe rebuild.xml``  You'll get a new bin+cue file named mkpsxiso.bin/.cue. Consider editing the xml file to change the name of the bin+cue file names. Also consider editing the .cue file if you want to include your own custom music tracks in the game.
 
 
 If you have any questions, issues or things to add, feel free to contact me via email: ```ilovezcartoonz@protonmail.com```
