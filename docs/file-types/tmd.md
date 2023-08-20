@@ -15,8 +15,16 @@ And because of the fact that the objects that make up each file are polylines, a
 
 ## File Makeup
 
-| Header | Object Table | Primitives | Vertexes | Normals |
+| Header | Object Table | Primitives | Vertices | Normals |
 |:------:|:------------:|:----------:|:--------:|:-------:|
+
+The short rundown of what each of the parts of the file do.
+
+* The header indicates the version of the TMD, any flags that the TMD needs to set and the number of objects in the file.
+* The object table, you guessed it, lists the pointers to all the objects.
+* Primitives are arrangments of drawing packets, being: polygons, lines, and sprites.
+* Vertices, obviously, are the points for all the objects.
+* Normals help with shading, which is completely irrelevant for vib-ribbon.
 
 ## TMD Applications
 ### Vibri
@@ -29,7 +37,7 @@ However, taking the camera to a different position reveals a few things about Vi
 <div class="flex-container">
 <div><br>Certain angles are still applied to some of the limbs of Vibri. In the example gif for example, you can notice how her feet and her arms are tilted, which is usually not though about when rendered into the game. Her torso is also a full cone-like structure rather than a plane like the rest of the model's objects.
 <br><br>
-Perhaps the most noticable, her eyes also pertrude from the rest of the face, likely as either a way to make them appear thinner than they really are, or to make them scale more naturally when turning. A final thing you may notice is the triangle that appears on her head. This might have been used as a way to help center the head during the animating process.</div>
+Perhaps the most noticable, her eyes also pertrude from the rest of the face, likely as either a way to make them appear thinner than they really are, or to make them scale more naturally when turning. A final thing you may notice is the triangle that appears on her head. This might have been used as a way to help center the head during the animating process. This triangle of course, does not show up in the actual game.</div>
 <div><img src="../../img/menu_vibri_eyes_demonstration.gif" width="1600"></img></div>
 </div><br>
 The other Vibri rabbit model is titled `MODEL.TMD`, located in `GAME\FILES\CHARA\PEELOO` is used for the rest of the game and is a 8528-byte file. During gameplay, the game also loads her other forms from the `FROG`, `SNAKE`, and `SUPER` folders, also located in `GAME\FILES\CHARA`, all of which also called `MODEL.TMD`. The folders also contain all the ANM files for the respective forms, as they of course, cannot share the same ones.

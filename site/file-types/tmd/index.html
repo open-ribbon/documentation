@@ -100,7 +100,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <th style="text-align: center;">Header</th>
 <th style="text-align: center;">Object Table</th>
 <th style="text-align: center;">Primitives</th>
-<th style="text-align: center;">Vertexes</th>
+<th style="text-align: center;">Vertices</th>
 <th style="text-align: center;">Normals</th>
 </tr>
 </thead>
@@ -114,6 +114,14 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </tr>
 </tbody>
 </table>
+<p>The short rundown of what each of the parts of the file do.</p>
+<ul>
+<li>The header indicates the version of the TMD, any flags that the TMD needs to set and the number of objects in the file.</li>
+<li>The object table, you guessed it, lists the pointers to all the objects.</li>
+<li>Primitives are arrangments of drawing packets, being: polygons, lines, and sprites.</li>
+<li>Vertices, obviously, are the points for all the objects.</li>
+<li>Normals help with shading, which is completely irrelevant for vib-ribbon.</li>
+</ul>
 <h2 id="tmd-applications">TMD Applications</h2>
 <h3 id="vibri">Vibri</h3>
 <p>There are two variants of Vibri's rabbit form inside of the games files. These two files only contain Vibri’s rabbit form, as her other forms are located in other files. One of them is located in <code>TITLE\FILES\MOVIE\TITLE</code>, which is a 8120-byte file named <code>VIBRI.TMD</code>. It is used for the title screen, menus, and the tutorial. Essentially, any non-game setting may use this model rather than the other. A major difference to be known from the other models is that this one is not meant to be looked at from all directions, as this model takes a slightly more "two-dimensional" approach.</p>
@@ -122,7 +130,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <div class="flex-container">
 <div><br>Certain angles are still applied to some of the limbs of Vibri. In the example gif for example, you can notice how her feet and her arms are tilted, which is usually not though about when rendered into the game. Her torso is also a full cone-like structure rather than a plane like the rest of the model's objects.
 <br><br>
-Perhaps the most noticable, her eyes also pertrude from the rest of the face, likely as either a way to make them appear thinner than they really are, or to make them scale more naturally when turning. A final thing you may notice is the triangle that appears on her head. This might have been used as a way to help center the head during the animating process.</div>
+Perhaps the most noticable, her eyes also pertrude from the rest of the face, likely as either a way to make them appear thinner than they really are, or to make them scale more naturally when turning. A final thing you may notice is the triangle that appears on her head. This might have been used as a way to help center the head during the animating process. This triangle of course, does not show up in the actual game.</div>
 <div><img src="../../img/menu_vibri_eyes_demonstration.gif" width="1600"></img></div>
 </div>
 <p><br>
