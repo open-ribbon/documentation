@@ -1,0 +1,1 @@
+<!-- Consider reading this page when attempting to figgure out these file formats: https://wiki.xentax.com/index.php/VAB_Audio      incase site is down: http://web.archive.org/web/20230517092438/https://wiki.xentax.com/index.php/VAB_Audio -->
