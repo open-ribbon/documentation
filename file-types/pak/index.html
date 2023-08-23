@@ -32,6 +32,10 @@
       var is_top_frame = false;
         
         var pageToc = [
+          {title: "PAK - Vib-Ribbon Archive", url: "#_top", children: [
+              {title: "File Makeup", url: "#file-makeup" },
+              {title: "PAK Implementations", url: "#pak-implementations" },
+          ]},
         ];
 
     </script>
@@ -78,7 +82,49 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 
     
 
-    
+    <h1 id="pak-vib-ribbon-archive">PAK - Vib-Ribbon Archive</h1>
+<p>Vib-Ribbon's PAK format is the primary data storage structure in the game. Compared to other propietary formats of archival from other games, this one is relatively simple. Several of them are laid throughout the game files. Unlike the usual ZIP, 7Z, or GZIP file, the contents are stored uncompressed, akin to a TAR archive, little endian. Of course, the files inside are indexed with a basic table of contents.</p>
+<h2 id="file-makeup">File Makeup</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Header</th>
+<th style="text-align: center;">File Offset Table</th>
+<th style="text-align: center;">File Name</th>
+<th style="text-align: center;">File Length</th>
+<th style="text-align: center;">File Data</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><em>(The last three are run through for each file that exists in the archive.)</em></p>
+<p>The short rundown of what each of the parts of the file do.</p>
+<ul>
+<li>The header, being only four bytes long, contains just the file count in the archive, stored as an unsigned integer, which can potentially carry up to 4.2 billion files inside... not that you'd want to though.</li>
+<li>There is also a series of offsets that the game creates pointers for that denotes the correct place where the beginning of the file should be. This is known as the offset table, also known as the "table of contents."</li>
+<li>At each file offset, the file name is given first, including the directory. If the number of characters in the file name is not a multiple of four, there can be 1 to 3 null characters that pad to the next 4-byte sequence, which contains the length of the file in bytes, as an unsigned integer. Finally, the file data itself is placed after.</li>
+</ul>
+<h2 id="pak-implementations">PAK Implementations</h2>
+<h3 id="filespak-and-xx_filespak">FILES.PAK and xx_FILES.PAK</h3>
+<p>The PAK files for vib-ribbon are placed under <code>GAME\</code>, <code>TITLE\</code>, and <code>KIOSK\</code>, which are then used by their respective executable, and are unpacked during gameplay.</p>
+<p>In the Japanese game, all PAK files are named <code>FILES.PAK</code>, which cannot be said for the European version, because of the presence of multiple languages. Each language has a prefixed number at the beginning of its filename, and is written in base-16, double for each language. Some of the files contained also have this prefix, depending on whether there is translated text or not.</p>
+<ul>
+<li><code>01_FILES</code> - Japanese</li>
+<li><code>02_FILES</code> - English</li>
+<li><code>04_FILES</code> - German</li>
+<li><code>08_FILES</code> - Spanish</li>
+<li><code>10_FILES</code> - French</li>
+<li><code>20_FILES</code> - Italian</li>
+</ul>
+<p><code>TITLE\FILES.PAK</code> maintains the same name in the Japanese and European releases of vib-ribbon. Its translations are also included in the same directory as the file that is translated, because MAIN_T is able to change the language on the fly, whereas the setting is only carried over to MAIN_G and MAIN_K.</p>
 
   <br>
     

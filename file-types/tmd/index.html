@@ -34,7 +34,7 @@
         var pageToc = [
           {title: "TMD - PlayStation Model", url: "#_top", children: [
               {title: "File Makeup", url: "#file-makeup" },
-              {title: "TMD Applications", url: "#tmd-applications" },
+              {title: "TMD Implementations", url: "#tmd-implementations" },
           ]},
         ];
 
@@ -122,7 +122,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <li>Vertices, obviously, are the points for all the objects.</li>
 <li>Normals help with shading, which is completely irrelevant for vib-ribbon.</li>
 </ul>
-<h2 id="tmd-applications">TMD Applications</h2>
+<h2 id="tmd-implementations">TMD Implementations</h2>
 <h3 id="fonts">Fonts</h3>
 <p>As stated before, all vector objects are loaded from TMD files, including the font files. The PAL version of the game uses one of two main font files depending on what the language is set to from the menu. An oddity that can be seen is that all of the Japanese files, including the katakana font, is still in the European version, inside <code>01_FILES</code>, but are left only used in the Japanese release.</p>
 <p>Each <code>FONT</code> folder contains two TMDs, <code>FE_FONT.TMD</code> (<code>01_FONT.TMD</code> for Japanese) and <code>MARK.TMD</code>. The actual symbols used to make sentences are made from <code>FE_FONT.TMD</code>, whereas <code>MARK.TMD</code> contains shape-represenations for scoring. One thing to note is that the numbers saved in <code>01_FONT.TMD</code> are wider than they are in <code>FE_FONT.TMD</code>, probably because of the katakana also written in the Japanese file.</p>
@@ -133,8 +133,11 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <p><strong>01_FONT.TMD</strong>
 <center><img src="../../img/01_font.png"></img></center> </p>
 <h3 id="vibri">Vibri</h3>
-<p>There are two variants of Vibri's rabbit form inside of the games files. These two files only contain Vibri’s rabbit form, as her other forms are located in other files. One of them is located in <code>TITLE\FILES\MOVIE\TITLE</code>, which is a 8120-byte file named <code>VIBRI.TMD</code>. It is used for the title screen, menus, and the tutorial. Essentially, any non-game setting may use this model rather than the other. A major difference to be known from the other models is that this one is not meant to be looked at from all directions, as this model takes a slightly more "two-dimensional" approach.</p>
-<p>However, taking the camera to a different position reveals a few things about Vibri that suggest that the third dimension was used to help make certain details.
+<p>There are three variants of Vibri's rabbit form inside of the games files, a different variant is used for each executable of the game. These three files, to reduce confusion, only contain Vibri’s rabbit form, as her other forms are located in other files. A major thing about Vibri's model to be known is that this one is not meant to be looked at from all directions, as this model takes a slightly more "two-dimensional" approach.</p>
+<p>The one used for MAIN_T is located in <code>TITLE\FILES\MOVIE\TITLE\</code>, which is a 8120-byte file named <code>VIBRI.TMD</code>. It is used for the title screen, and contains most of the same objects as MAIN_G's Vibri model, with the exception of omitting a few of them, which seem to relate to arms.</p>
+<p>MAIN_G's Vibri rabbit model is a 8528-byte file titled two different things depending on where it comes from. As such, the same file is located in two different places at all times, <code>GAME\xx_FILES\TITLE\VIBRI\</code> and <code>GAME\xx_FILES\CHARA\PEELOO\</code>, where the files are named <code>VIBRI.TMD</code> and <code>MODEL.TMD</code> respectively. The former is used for the game menus, where the other is used for gameplay. During gameplay, the game also loads her other forms from the <code>FROG</code>, <code>SNAKE</code>, and <code>SUPER</code> folders, also located in <code>GAME\xx_FILES\CHARA\</code>, all of which also called <code>MODEL.TMD</code>. The folders also contain all the ANM files for the respective forms, as they of course, cannot share the same ones.</p>
+<p>And finally, the third variant of the Vibri model is the smallest, being comprised of only 4400 bytes. This one is used during MAIN_K's execution -- which is the tutorial. It is not only smaller in file size, but it is also curiously smaller in <em>physical</em> size. This file is located in <code>KIOSK\xx_FILES\MOVIE\KIOSK2\</code> and is named <code>MODEL.TMD</code>.</p>
+<p>As stated before, Vibri's model has to adapt to the position of the camera as all of her limbs are flat, taking the camera to a different / unintended position reveals a few things about Vibri that suggest that the third dimension was used to help make certain details.
 <center><img src="../../img/menu_vibri_camera_angle.gif"></img></center> </p>
 <div class="flex-container">
 <div><br>Certain angles are still applied to some of the limbs of Vibri. In the example gif for example, you can notice how her feet and her arms are tilted, which is usually not though about when rendered into the game. Her torso is also a full cone-like structure rather than a plane like the rest of the model's objects.
@@ -142,8 +145,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 Perhaps the most noticable, her eyes also pertrude from the rest of the face, likely as either a way to make them appear thinner than they really are, or to make them scale more naturally when turning. A final thing you may notice is the triangle that appears on her head. This might have been used as a way to help center the head during the animating process. This triangle of course, does not show up in the actual game.</div>
 <div><img src="../../img/menu_vibri_eyes_demonstration.gif" width="1600"></img></div>
 </div>
-<p><br>
-The other Vibri rabbit model is titled <code>MODEL.TMD</code>, located in <code>GAME\FILES\CHARA\PEELOO</code> is used for the rest of the game and is a 8528-byte file. During gameplay, the game also loads her other forms from the <code>FROG</code>, <code>SNAKE</code>, and <code>SUPER</code> folders, also located in <code>GAME\FILES\CHARA</code>, all of which also called <code>MODEL.TMD</code>. The folders also contain all the ANM files for the respective forms, as they of course, cannot share the same ones.</p>
+<p><br></p>
 <p>In all of the models for Vibri, the eyes are only visible from one side because the PlayStation is able to hide any object from the backside.</p>
 
   <br>
