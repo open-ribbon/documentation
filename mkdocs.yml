@@ -15,6 +15,7 @@ theme:
 
 nav:
 - Index: "index.md"
+- How to Help: "how-to-help.md"
 - Decompilation:
   - File Extraction: "decompilation/file-ext.md"
   - Resources and Setup: "decompilation/resources.md"
