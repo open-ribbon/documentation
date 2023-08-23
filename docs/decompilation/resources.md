@@ -27,7 +27,7 @@ After this, run the extract command, `./VibRipper.exe u 01_FILES.PAK EXTRACTED_F
 
 
 ## How to edit TMDs, ANMs, and ANCs
-There are two currently known methods to edit models and animations. One uses Blender and the other uses LightWave.
+The models and animations can be imported into 3D modeler programs, but there currently isn't a known way to export the models or animations into their respectable file formats. There are two currently known methods to edit models and animations. One uses Blender and the other uses LightWave.
 
 ### Blender Instructions
 If you want to export the animations on Blender, you can use a tool created by [Murugo](https://github.com/Murugo/), who created a custom addon that can work with Vib-Ribbon's animation and model files; however the plugin was designed for Blender 2.8.x and as such will only work in that version range alone.

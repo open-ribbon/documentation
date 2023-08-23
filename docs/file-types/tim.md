@@ -1,0 +1,1 @@
+<!-- Each TIM have their own color palette. Not all colors need to be assigned, sometimes the unused ones are assigned as transparent. SCE screen uses a 16 color (4 BPP) palette. Nanaonsha logo uses a 256 color (8 BPP) palette. This webpage will be pretty useful: https://www.psxdev.net/forum/viewtopic.php?t=109 -->
