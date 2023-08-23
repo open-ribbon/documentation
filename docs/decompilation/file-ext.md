@@ -31,8 +31,8 @@ However, if you insist on not using blender, [TMD2LWO](https://zophar.net/utilit
 ANM are character/model animation files, while ANC are camera animation files. You can port them through blender with the addon mentioned above. Just make sure you select the whole model before importing the character animations.
 
 
-## Images (TIM) !WIP!
-Trying to figure out a new method for viewing and modifying TIM files. More testing is needed. Try using [TIM2VIEW](https://github.com/lab313ru/tim2view) to view the files and possibly replace them. I got [IMG2TIM](https://github.com/Lameguy64/img2tim) to work before if changing an img back to a TMD, though you might need to specify the VRAM X and Y values.
+## Images/Textures (TIM)
+TIM files are the texture files. Vib-Ribbon only uses textures during start-up, with the "Sony Computer Entertainment Presents" text and NanaOn-Sha logo. [TIM2VIEW](https://github.com/lab313ru/tim2view) allows you to view TIM files, export them as PNGs and replace textures. When editing the extracted PNGs, you'll need to use an image editor that'll export the images with the same color palette and bit depth, or else reimporting the images back to TIM2VIEW will mess with the colors. I used [GIMP](https://www.gimp.org/) and it worked well for editing and exporting the textures. Use the Palette and Colormap windows to edit colors. When you wanna export, make sure Save resolution, Save Color Profile and Automatic Pixelformat are set before exporting the images. To replace an image, simply import the image to TIM2VIEW while on the same tab of the TIM you wanna replace. Once imported, it automatically gets replaced. Do note that the color pallete will remain the same, and you'll need to edit each color one at a time from the program. Best to keep the amount of colors you use small if you don't want the process to be long and tedious. 
 
 
 ## AUDIO (VB and VH)
