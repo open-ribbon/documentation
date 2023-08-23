@@ -6,4 +6,4 @@ To put it simply, each page is a Markdown file. Each page is located in the `doc
 
 For more help on MkDocs, once again, the documentation for that tool is found [here](https://www.mkdocs.org/). To set up MkDocs on your computer, you need Python installed. From there, `pip install mkdocs` should be your next step. After that, you should be good to go.
 
-As a side note, running `mkdocs serve` in the repository of your fork should run your site on localhost, where you can see your changes in actions before you make your commit or merge request.
+As a side note, running `mkdocs serve` in the repository of your fork should run your site on localhost, where you can see your changes in action before you make your commit or merge request.
