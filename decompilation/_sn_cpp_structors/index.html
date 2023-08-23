@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="Team Open-Ribbon">
+    
+    <link rel="shortcut icon" href="../../img/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>_sn_cpp_structors() - Open-Ribbon's Vib-Ribbon Technical Database</title>
+    <link href="../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "_sn_cpp_structors()", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../main_t/globals/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../main_t/globals/" class="btn btn-xs btn-link">
+        Globals
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../resources/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../resources/" class="btn btn-xs btn-link">
+        Resources and Setup
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h1 id="_sn_cpp_structors">_sn_cpp_structors()</h1>
+<p>Within main executables, there exists a method that initializes objects of classes, which is called a <strong>constructor.</strong> These constructors will be called for object creation. <em>Names for these are not yet finalized as some of them still read "UnkCtor"</em></p>
+<pre><code>FontHack__Ctor
+FileSys__Ctor
+TmdLineObj__Ctor
+Movie__Ctor
+InputSys__Ctor
+UnkCtor00
+UnkCtor01
+UnkCtor02
+UnkCtor03
+UnkCtor04
+</code></pre>
+<p>The procedure for getting all of these initialized is to make all the objects needed immediately or at least as soon as possible. The way that vib-ribbon takes care of this is to make an array <code>_CTOR_LIST__</code> with all of the above constructors. The <code>_sn_cpp_structors()</code> is then run inside <code>start()</code>.</p>
+<pre><code>void __fastcall _sn_cpp_structors(int sectionobj, int sectionobj_end)
+{
+  void (**ctor)(void);
+
+  // Iterate through every entry in the _CTOR_LIST__ array.
+  for ( ctor = (void (**)(void))sectionobj; (int)ctor &lt; sectionobj_end; ++ctor )
+  {
+    // Run constructor inside its respective class. 
+    if ( *ctor )
+      (*ctor)();
+  }
+}
+</code></pre>
+
+  <br>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../main_t/globals/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../main_t/globals/" class="btn btn-xs btn-link">
+        Globals
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../resources/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../resources/" class="btn btn-xs btn-link">
+        Resources and Setup
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="container-fluid wm-page-content">
+  <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

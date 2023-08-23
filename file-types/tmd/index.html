@@ -90,9 +90,9 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </style>
 
 <h1 id="tmd-playstation-model">TMD - PlayStation Model</h1>
-<p>Like every three-dimensional object in a video game, a character, such as Vibri, would need a 3d model in order to convey what the player is doing. Despite previous confusion within the confines of the Vib-Ribbon community, this is no exception for Vibri. The format in which Vib-Ribbon uses for its models is the TMD format, which is useful for being able to be integrated in system memory. These files tend to be small to the point where multiple tens, or maybe even a couple hundred could theoretically fit inside the base 2 megabytes of system memory on the PlayStation.</p>
+<p>Like every three-dimensional object in a video game, a character such as Vibri, would need a 3d model in order to convey what the player is doing. Despite previous confusion within the confines of the Vib-Ribbon community, this is no exception for Vibri. The format in which Vib-Ribbon uses for its models is the TMD format, which is useful for keeping filesize down in order to integrate Vib-Ribbon into the RAM of the Playstation. These files tend to be small to the point where multiple tens, or maybe even a couple hundred could theoretically fit inside the base 2 megabytes of system memory on the PlayStation.</p>
 <p>Vib-Ribbon makes use of these model files rather extensively compared other games due to the visual style of the game. From characters, to the ribbon itself, to even the font that the game uses, everything that is a vector traces back to one of these models. However, if imported straight into a program, such as Blender, you’ll only get pieces of a model that aren’t put together. It’s up to the ANM files to put them together.</p>
-<p>And because of the fact that the objects that make up each file are polylines, as opposed to polygons, they may render as invisible or otherwise incorrect or strange unless the user turns out some sort of wireframe mode.</p>
+<p>And because of the fact that the objects that make up each file are polylines, as opposed to polygons, they may render as invisible or otherwise incorrect or strange unless the user turns on some sort of wireframe mode.</p>
 <h2 id="file-makeup">File Makeup</h2>
 <table>
 <thead>
@@ -123,6 +123,15 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <li>Normals help with shading, which is completely irrelevant for vib-ribbon.</li>
 </ul>
 <h2 id="tmd-applications">TMD Applications</h2>
+<h3 id="fonts">Fonts</h3>
+<p>As stated before, all vector objects are loaded from TMD files, including the font files. The PAL version of the game uses one of two main font files depending on what the language is set to from the menu. An oddity that can be seen is that all of the Japanese files, including the katakana font, is still in the European version, inside <code>01_FILES</code>, but are left only used in the Japanese release.</p>
+<p>Each <code>FONT</code> folder contains two TMDs, <code>FE_FONT.TMD</code> (<code>01_FONT.TMD</code> for Japanese) and <code>MARK.TMD</code>. The actual symbols used to make sentences are made from <code>FE_FONT.TMD</code>, whereas <code>MARK.TMD</code> contains shape-represenations for scoring. One thing to note is that the numbers saved in <code>01_FONT.TMD</code> are wider than they are in <code>FE_FONT.TMD</code>, probably because of the katakana also written in the Japanese file.</p>
+<p><strong>MARK.TMD</strong>
+<center><img src="../../img/mark.png"></img></center> </p>
+<p><strong>FE_FONT.TMD</strong>
+<center><img src="../../img/fe_font.png"></img></center> </p>
+<p><strong>01_FONT.TMD</strong>
+<center><img src="../../img/01_font.png"></img></center> </p>
 <h3 id="vibri">Vibri</h3>
 <p>There are two variants of Vibri's rabbit form inside of the games files. These two files only contain Vibri’s rabbit form, as her other forms are located in other files. One of them is located in <code>TITLE\FILES\MOVIE\TITLE</code>, which is a 8120-byte file named <code>VIBRI.TMD</code>. It is used for the title screen, menus, and the tutorial. Essentially, any non-game setting may use this model rather than the other. A major difference to be known from the other models is that this one is not meant to be looked at from all directions, as this model takes a slightly more "two-dimensional" approach.</p>
 <p>However, taking the camera to a different position reveals a few things about Vibri that suggest that the third dimension was used to help make certain details.
