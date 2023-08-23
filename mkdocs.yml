@@ -18,6 +18,7 @@ nav:
 - Decompilation:
   - File Extraction: "decompilation/file-ext.md"
   - Resources and Setup: "decompilation/resources.md"
+  - _sn_cpp_structors(): "decompilation/_sn_cpp_structors.md"
   - MAIN_T.EXE:
     - Globals: "decompilation/main_t/globals.md"
 - File Types:

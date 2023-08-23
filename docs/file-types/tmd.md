@@ -27,6 +27,20 @@ The short rundown of what each of the parts of the file do.
 * Normals help with shading, which is completely irrelevant for vib-ribbon.
 
 ## TMD Applications
+### Fonts
+As stated before, all vector objects are loaded from TMD files, including the font files. The PAL version of the game uses one of two main font files depending on what the language is set to from the menu. An oddity that can be seen is that all of the Japanese files, including the katakana font, is still in the European version, inside `01_FILES`, but are left only used in the Japanese release.
+
+Each `FONT` folder contains two TMDs, `FE_FONT.TMD` (`01_FONT.TMD` for Japanese) and `MARK.TMD`. The actual symbols used to make sentences are made from `FE_FONT.TMD`, whereas `MARK.TMD` contains shape-represenations for scoring. One thing to note is that the numbers saved in `01_FONT.TMD` are wider than they are in `FE_FONT.TMD`, probably because of the katakana also written in the Japanese file.
+
+**MARK.TMD**
+<center><img src="../../img/mark.png"></img></center> 
+
+**FE_FONT.TMD**
+<center><img src="../../img/fe_font.png"></img></center> 
+
+**01_FONT.TMD**
+<center><img src="../../img/01_font.png"></img></center> 
+
 ### Vibri
 
 There are two variants of Vibri's rabbit form inside of the games files. These two files only contain Vibri’s rabbit form, as her other forms are located in other files. One of them is located in `TITLE\FILES\MOVIE\TITLE`, which is a 8120-byte file named `VIBRI.TMD`. It is used for the title screen, menus, and the tutorial. Essentially, any non-game setting may use this model rather than the other. A major difference to be known from the other models is that this one is not meant to be looked at from all directions, as this model takes a slightly more "two-dimensional" approach.
