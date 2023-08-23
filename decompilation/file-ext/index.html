@@ -37,7 +37,7 @@
               {title: "Extracting PAK files", url: "#extracting-pak-files" },
               {title: "Models (TMD)", url: "#models-tmd" },
               {title: "Animations (ANM and ANC)", url: "#animations-anm-and-anc" },
-              {title: "Images (TIM) !WIP!", url: "#images-tim-wip" },
+              {title: "Images/Textures (TIM)", url: "#imagestextures-tim" },
               {title: "AUDIO (VB and VH)", url: "#audio-vb-and-vh" },
               {title: "Rebuilding PAK files", url: "#rebuilding-pak-files" },
               {title: "Making a BIN/ISO file", url: "#making-a-biniso-file" },
@@ -108,8 +108,8 @@ If you're using blender then consider <a href="https://github.com/Murugo/Misc-Ga
 However, if you insist on not using blender, <a href="https://zophar.net/utilities/psxutil/tmd2lwo.html">TMD2LWO</a> and a program that can read LWO (LightWave Objects) files will be needed. Use TMD2LWO the same way as Vib-Ripper was used. EX: <code>TMD2LWO.EXE MODEL.TMD WORM</code></p>
 <h2 id="animations-anm-and-anc">Animations (ANM and ANC)</h2>
 <p>ANM are character/model animation files, while ANC are camera animation files. You can port them through blender with the addon mentioned above. Just make sure you select the whole model before importing the character animations.</p>
-<h2 id="images-tim-wip">Images (TIM) !WIP!</h2>
-<p>Trying to figure out a new method for viewing and modifying TIM files. More testing is needed. Try using <a href="https://github.com/lab313ru/tim2view">TIM2VIEW</a> to view the files and possibly replace them. I got <a href="https://github.com/Lameguy64/img2tim">IMG2TIM</a> to work before if changing an img back to a TMD, though you might need to specify the VRAM X and Y values.</p>
+<h2 id="imagestextures-tim">Images/Textures (TIM)</h2>
+<p>TIM files are the texture files. Vib-Ribbon only uses textures during start-up, with the "Sony Computer Entertainment Presents" text and NanaOn-Sha logo. <a href="https://github.com/lab313ru/tim2view">TIM2VIEW</a> allows you to view TIM files, export them as PNGs and replace textures. When editing the extracted PNGs, you'll need to use an image editor that'll export the images with the same color palette and bit depth, or else reimporting the images back to TIM2VIEW will mess with the colors. I used <a href="https://www.gimp.org/">GIMP</a> and it worked well for editing and exporting the textures. Use the Palette and Colormap windows to edit colors. When you wanna export, make sure Save resolution, Save Color Profile and Automatic Pixelformat are set before exporting the images. To replace an image, simply import the image to TIM2VIEW while on the same tab of the TIM you wanna replace. Once imported, it automatically gets replaced. Do note that the color pallete will remain the same, and you'll need to edit each color one at a time from the program. Best to keep the amount of colors you use small if you don't want the process to be long and tedious. </p>
 <h2 id="audio-vb-and-vh">AUDIO (VB and VH)</h2>
 <p>Use <a href="https://www.romhacking.net/utilities/679/">PSound</a> <a href="https://www.zophar.net/utilities/psxutil/psound-soundreaver2.html">(ALT VERSION)</a>. VB files contain all the audio clips. VH has audio header data. Can extract audio, but currently no known way to replace audio. Read more about VAB audio <a href="https://wiki.xentax.com/index.php/VAB_Audio">here</a></p>
 <h2 id="rebuilding-pak-files">Rebuilding PAK files</h2>
