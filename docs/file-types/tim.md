@@ -2,7 +2,7 @@
 
 ## TIM Applications
 ### Logos
-The only TIMs that are used in the game are at the beginning of MAIN\_T exectution. They are located in `TITLE\FILES\MENU\LOGOS\`. Every TIM is a section of a image, and all of them get loaded and lined up to complete the image.
+The only TIMs that are used in the game are at the beginning of MAIN\_T execution. They are located in `TITLE\FILES\MENU\LOGOS\`. Every TIM is a section of an image, and all of them get loaded and lined up to complete the image.
 
 `SONY_X.TIM` Make up the "Sony Computer Entertainment Inc. Presents" screen. Uses a 16 color (4 BPP) palette. Only used in the Japan version. Is present in the PAL version, but goes unused (renamed to `01_SONY_X.TIM`)
 
