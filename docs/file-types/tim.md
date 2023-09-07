@@ -15,7 +15,7 @@ The TIM format is a little endian-based image file format for the PlayStation. W
 
 | Offset | Type | Name | Notes |
 |-|-|-|-|
-| 0x00 | int32 | bnum | Said to be the data length of the CLUT, but doesn't seem to do anything |
+| 0x00 | int32 | bnum | Data length of the header + CLUT |
 | 0x04 | int16 | DX | X Coordinate for VRAM placement |
 | 0x06 | int16 | DY | Y Coordinate for VRAM placement |
 | 0x08 | int16 | H | Horizontal resolution for placing CLUT in VRAM |
@@ -34,11 +34,11 @@ Each color is recorded as a int16 value, but is read under binary. Each color is
 | 1 | All 0's | Black, Non-Transparent |
 | 1 | Any value | Semi-Transparent color |
 
-## Image Header
+## Pixel Header
 
 | Offset | Type | Name | Notes |
 |-|-|-|-|
-| 0x00 | int32 | bnum | Said to be the data length of pixel data, but doesn't seem to do anything |
+| 0x00 | int32 | bnum | Data length of the header + all pixel data |
 | 0x04 | int16 | DX | X Coordinate for VRAM placement |
 | 0x06 | int16 | DY | Y Coordinate for VRAM placement |
 | 0x08 | int16 | H | Horizontal resolution of image in VRAM |
@@ -46,7 +46,7 @@ Each color is recorded as a int16 value, but is read under binary. Each color is
 
 The PlayStation's VRAM stores all images as 16-bit color depth. For 8 and 4-bit images, their `H` value need to be devided to load into the VRAM correctly, and will be corrected when displayed. For 8-bit images, `H` should be half of it's original horizontal resolution. For 4-bit, `H` is the original horizontal resolution devided by 4.
 
-## Image Data
+## Pixel Data
 
 How each pixel is recorded depends on the color depth of the image. For 4-bit color, 4 bits are used to specify what color from the CLUT will be used for that pixel. For 8-bit color, 8 bits are used to specify what color. For 16-bit color, every pixel uses the CLUT data format.
 
