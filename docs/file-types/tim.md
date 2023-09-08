@@ -21,7 +21,7 @@ The TIM format is a little endian-based image file format for the PlayStation. W
 | 0x08 | int16 | H | Horizontal resolution for placing CLUT in VRAM |
 | 0x08 | int16 | V | Virtical resolution for placing CLUT in VRAM |
 
-`H` and `V` have to equal 16 for 4-bit color depth and 256 for 8-bit color depth when multiplied. Supposedly you can change the resolution of CLUT to where it's more of a rectangle than a 256 pixel long line, possibly saving some space, but doing so will make the other colors go unused so it's not recommended. Keep `H` set to 256/16 and `V` to 1.
+`H` and `V` have to equal 16 for 4-bit color depth and 256 for 8-bit color depth when multiplied. Supposedly you can change the resolution of CLUT to where it's more of a rectangle than a 256 pixel long line, possibly saving some space, but doing so will make the other colors go unused so it's not recommended. Keep `H` set to 16 or 256 and `V` to 1.
 
 ## CLUT Data
 
