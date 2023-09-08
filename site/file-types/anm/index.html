@@ -32,6 +32,9 @@
       var is_top_frame = false;
         
         var pageToc = [
+          {title: "ANM - Model Animation", url: "#_top", children: [
+              {title: "File Layout", url: "#file-layout" },
+          ]},
         ];
 
     </script>
@@ -78,7 +81,159 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 
     
 
-    
+    <h1 id="anm-model-animation">ANM - Model Animation</h1>
+<p>The ANM format stores keyframes for a TMD model animation. Longer animation sequences may be split into multiple .ANM files.</p>
+<h2 id="file-layout">File Layout</h2>
+<ul>
+<li>.ANM<ul>
+<li>1 <code>Header</code></li>
+<li>0-n <code>Frame</code><ul>
+<li>0-n <code>Keyframe</code> (per object)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="header">Header</h3>
+<table>
+<thead>
+<tr>
+<th>Offset</th>
+<th>Type</th>
+<th>Name</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x00</td>
+<td>int16</td>
+<td>unk</td>
+<td>Always 0x8000</td>
+</tr>
+<tr>
+<td>0x02</td>
+<td>int16</td>
+<td>unk</td>
+<td>Unused? Possible values: 1, 15, 20, 30, or 60</td>
+</tr>
+<tr>
+<td>0x04</td>
+<td>uint16</td>
+<td>frameCount</td>
+<td></td>
+</tr>
+<tr>
+<td>0x06</td>
+<td>uint16[]</td>
+<td>frameOffsetTable</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>The <code>frameOffsetTable</code> array contains <code>(frameCount + 1)</code> elements. To find the start offset of frame <code>n</code>, multiply the value at index <code>n</code> by 2. The last entry marks the end offset of the file.</p>
+<h3 id="frame">Frame</h3>
+<table>
+<thead>
+<tr>
+<th>Offset</th>
+<th>Type</th>
+<th>Name</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x00</td>
+<td>Keyframe[]</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Contains keyframes for all keyed objects in the TMD for one animation frame.</p>
+<p>If an object index does not have a keyframe, it is not drawn for the current frame.</p>
+<p>There is no explicit count for the number of elements in the <code>Keyframe</code> array. To determine this count for frame <code>n</code>, continue processing the next <code>Keyframe</code> until reaching the end offset given by <code>frameOffsetTable[n + 1] * 2</code>.</p>
+<h3 id="keyframe">Keyframe</h3>
+<table>
+<thead>
+<tr>
+<th>Offset</th>
+<th>Type</th>
+<th>Name</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x00</td>
+<td>uint8</td>
+<td>objectIndex</td>
+<td></td>
+</tr>
+<tr>
+<td>0x01</td>
+<td>uint8</td>
+<td>flags</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>int16</td>
+<td>rotationX</td>
+<td>Present if <code>(flags &amp; 0b001) &gt; 0</code>. Radians = value * 2π / 4096</td>
+</tr>
+<tr>
+<td></td>
+<td>int16</td>
+<td>rotationY</td>
+<td>Present if <code>(flags &amp; 0b001) &gt; 0</code>. Radians = value * 2π / 4096</td>
+</tr>
+<tr>
+<td></td>
+<td>int16</td>
+<td>rotationZ</td>
+<td>Present if <code>(flags &amp; 0b001) &gt; 0</code>. Radians = value * 2π / 4096</td>
+</tr>
+<tr>
+<td></td>
+<td>int16</td>
+<td>scaleX</td>
+<td>Present if <code>(flags &amp; 0b010) &gt; 0</code>. Scale = value / 4096</td>
+</tr>
+<tr>
+<td></td>
+<td>int16</td>
+<td>scaleY</td>
+<td>Present if <code>(flags &amp; 0b010) &gt; 0</code>. Scale = value / 4096</td>
+</tr>
+<tr>
+<td></td>
+<td>int16</td>
+<td>scaleZ</td>
+<td>Present if <code>(flags &amp; 0b010) &gt; 0</code>. Scale = value / 4096</td>
+</tr>
+<tr>
+<td></td>
+<td>int16</td>
+<td>positionX</td>
+<td>Present if <code>(flags &amp; 0b100) &gt; 0</code>.</td>
+</tr>
+<tr>
+<td></td>
+<td>int16</td>
+<td>positionY</td>
+<td>Present if <code>(flags &amp; 0b100) &gt; 0</code>.</td>
+</tr>
+<tr>
+<td></td>
+<td>int16</td>
+<td>positionZ</td>
+<td>Present if <code>(flags &amp; 0b100) &gt; 0</code>.</td>
+</tr>
+</tbody>
+</table>
+<p>Each keyframe animates an individual object in the TMD indicated by <code>objectIndex</code>. Rotation, scale and position keys are optional depending on the bits set in <code>flags</code>, and will always appear in that order.</p>
 
   <br>
     

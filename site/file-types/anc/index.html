@@ -32,6 +32,9 @@
       var is_top_frame = false;
         
         var pageToc = [
+          {title: "ANC - Camera Animation", url: "#_top", children: [
+              {title: "File Layout", url: "#file-layout" },
+          ]},
         ];
 
     </script>
@@ -78,7 +81,109 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 
     
 
-    
+    <h1 id="anc-camera-animation">ANC - Camera Animation</h1>
+<p>The ANC format store keyframes for a single camera animation. These files are used to control the camera during gameplay, menus and cutscenes. Longer animation sequences may be split into multiple .ANC files.</p>
+<h2 id="file-layout">File Layout</h2>
+<ul>
+<li>.ANC<ul>
+<li>1 <code>Header</code></li>
+<li>0-n <code>CameraKeyrame</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="header">Header</h3>
+<table>
+<thead>
+<tr>
+<th>Offset</th>
+<th>Type</th>
+<th>Name</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x00</td>
+<td>int16</td>
+<td>unk</td>
+<td>Always 0x8000</td>
+</tr>
+<tr>
+<td>0x02</td>
+<td>int16</td>
+<td>unk</td>
+<td>Unused? Possible values: 1, 15, 20, 30, or 60</td>
+</tr>
+<tr>
+<td>0x04</td>
+<td>uint16</td>
+<td>keyframeCount</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="camerakeyframe">CameraKeyframe</h3>
+<table>
+<thead>
+<tr>
+<th>Offset</th>
+<th>Type</th>
+<th>Name</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x00</td>
+<td>int16</td>
+<td>vpx</td>
+<td>Viewport X</td>
+</tr>
+<tr>
+<td>0x02</td>
+<td>int16</td>
+<td>vpy</td>
+<td>Viewport Y</td>
+</tr>
+<tr>
+<td>0x04</td>
+<td>int16</td>
+<td>vpz</td>
+<td>Viewport Z</td>
+</tr>
+<tr>
+<td>0x06</td>
+<td>int16</td>
+<td>vrx</td>
+<td>Reference point X</td>
+</tr>
+<tr>
+<td>0x08</td>
+<td>int16</td>
+<td>vry</td>
+<td>Reference point Y</td>
+</tr>
+<tr>
+<td>0x0A</td>
+<td>int16</td>
+<td>vrz</td>
+<td>Reference point Z</td>
+</tr>
+<tr>
+<td>0x0C</td>
+<td>int16</td>
+<td>rz</td>
+<td>Viewport twist. 0x1000 = 1º</td>
+</tr>
+<tr>
+<td>0x0E</td>
+<td>int16</td>
+<td>fov</td>
+<td>Field of view</td>
+</tr>
+</tbody>
+</table>
+<p>Each frame, the game orients the viewport camera by calling <code>GsSetRefView2()</code> with a static <code>GsRVIEW2</code> object using parameters supplied by the current keyframe. This function call places the camera at coordinates <code>(vpx, vpy, vpz)</code> facing towards <code>(vrx, vry, vrz)</code>.</p>
 
   <br>
     
