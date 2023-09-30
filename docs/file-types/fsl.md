@@ -228,7 +228,7 @@ Spawns obstacles upside-down that flip into place as they approach Vibri.
 
 ##### Camera Event
 
-Sets the camera angle for the segment. The camera index points to an [.ANC](../anc) file in the "GAME/\*_FILES.PAK/ROAD/" folder:
+Sets the camera angle for the segment. The camera index points to an [.ANC](anc.md) file in the "GAME/\*_FILES.PAK/ROAD/" folder:
 
 | Camera Index | Camera Name |
 |-|-|
