@@ -31,9 +31,9 @@ The system file contains a total of 7 tracks, including 2 tracks for each of the
 * Track 5: Roll Along (Gold)
 * Track 6: Custom CD
 
-When playing a standard course, the game starts at time `0x0` and locates the first time segment in each of the control, pattern, and event segment tables for the current track. These time segments control different parameters during gameplay such as the pattern to spawn obstacles, how fast these obstacles move toward Vibri, and the camera angle for a particular section. As time passes, time segments in each of the three tables advance in parallel until the track ends.
+When playing a standard course, the game starts at time `0x0` and locates the first time segment for the current track in each of the control, pattern, and event segment tables. These time segments control different parameters during gameplay, such as the pattern to spawn obstacles, how fast these obstacles move toward Vibri, and the camera angle for a particular section of the song.
 
-When playing a custom CD, the game will select a random start time between `0x0` and `0x5D5DDB0` for one track. The game then starts playing time segments in order from that starting position. If the CD has multiple tracks, each track will be assigned a random index in an array of start times.
+When playing a custom CD, the game will select a random start time between `0x0` and `0x5D5DDB0`. The game then starts playing time segments in order from that starting position. If the CD has multiple tracks, each track will be assigned a random index in an array of start times.
 
 The custom CD track orders times segments in each table from lowest to highest difficulty. This means that a CD with several tracks can get a mix of easy and hard courses, but the difficulty may jump around between tracks.
 
@@ -202,7 +202,7 @@ Stores a list of event segments for a single track.
 
 #### `EventSegment`
 
-Each segment is `0x18` bytes in length. Events are independent objects, and as such their durations may last longer than the current segment.
+Each segment is `0x18` bytes in length. Events may have durations that last shorter or longer than the current segment.
 
 | Offset | Type | Name | Notes |
 |-|-|-|-|
@@ -228,7 +228,7 @@ Spawns obstacles upside-down that flip into place as they approach Vibri.
 
 ##### Camera Event
 
-Sets the camera angle for the segment. The camera index points to an [.ANC](anc.md) file in the "GAME/\*_FILES.PAK/ROAD/" folder:
+Sets the camera angle for the segment. The camera index points to an [.ANC](anc.md) file in the "GAME/\*_FILES.PAK/ROAD/" folder. Possible values are:
 
 | Camera Index | Camera Name |
 |-|-|
@@ -251,6 +251,8 @@ Assigns a control, pattern, and event segment table index to each track. Starts 
 | 0x00 | TrackIndexEntry[] | entries | Size is given by `Header.trackIndexTableCount` |
 
 #### `TrackIndexEntry`
+
+Each entry is `0x0C` bytes in length.
 
 | Offset | Type | Name | Notes |
 |-|-|-|-|
