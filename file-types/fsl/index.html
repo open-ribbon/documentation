@@ -32,6 +32,9 @@
       var is_top_frame = false;
         
         var pageToc = [
+          {title: "FSL - Obstacle Course Data", url: "#_top", children: [
+              {title: "File Layout", url: "#file-layout" },
+          ]},
         ];
 
     </script>
@@ -78,7 +81,674 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 
     
 
-    
+    <h1 id="fsl-obstacle-course-data">FSL - Obstacle Course Data</h1>
+<p><strong>SYSTEM3.FSL</strong> is the main script file that Vib-Ribbon uses to control obstacles and other on-screen effects during gameplay. There are 6 exact copies of this file on the PAL disk, one for each language:</p>
+<ul>
+<li>GAME/01_FILES.PAK/SCRIPT/SYSTEM3.FSL (Japanese)</li>
+<li>GAME/02_FILES.PAK/SCRIPT/SYSTEM3.FSL (English)</li>
+<li>GAME/04_FILES.PAK/SCRIPT/SYSTEM3.FSL (German)</li>
+<li>GAME/08_FILES.PAK/SCRIPT/SYSTEM3.FSL (Spanish)</li>
+<li>GAME/10_FILES.PAK/SCRIPT/SYSTEM3.FSL (French)</li>
+<li>GAME/20_FILES.PAK/SCRIPT/SYSTEM3.FSL (Italian)</li>
+</ul>
+<h2 id="file-layout">File Layout</h2>
+<p>SYSTEM3.FSL is composed of 7 sections of data in order as follows:</p>
+<ul>
+<li><a href="#header">Header</a>: Stores the size of each table and other parameters.</li>
+<li><a href="#fixed-pattern-table">Fixed Pattern Table</a>: Lookup table of patterns that send obstacles in a fixed, repeating order.</li>
+<li><a href="#distribution-pattern-table">Distribution Pattern Table</a>: Lookup table of patterns that send obstacles in random order with a given seed and distribution.</li>
+<li><a href="#control-segment-table">Control Segment Table</a>: Time segments for each track that control the speed and gap between obstacles.</li>
+<li><a href="#pattern-segment-table">Pattern Segment Table</a>: Time segments for each track that determine which pattern to use for a section of obstacles. Each segment points to an index in either the fixed pattern table or distribution pattern table.</li>
+<li><a href="#event-segment-table">Event Segment Table</a>: Time segments for each track that trigger camera events and other miscellaneous effects.</li>
+<li><a href="#track-index-table">Track Index Table</a>: Assigns each track an index in the control, pattern, and effect segment tables.</li>
+</ul>
+<p>The system file contains a total of 7 tracks, including 2 tracks for each of the main courses (Bronze, Silver, Gold), and one very large track for custom CDs. Tracks are always stored in the following order:</p>
+<ul>
+<li>Track 0: Polaroid (Bronze)</li>
+<li>Track 1: Sunny Day (Bronze)</li>
+<li>Track 2: Laugh &amp; Peace (Silver)</li>
+<li>Track 3: Universal Dance (Silver)</li>
+<li>Track 4: Overflowing Emotions (Gold)</li>
+<li>Track 5: Roll Along (Gold)</li>
+<li>Track 6: Custom CD</li>
+</ul>
+<p>When playing a standard course, the game starts at time <code>0x0</code> and locates the first time segment for the current track in each of the control, pattern, and event segment tables. These time segments control different parameters during gameplay, such as the pattern to spawn obstacles, how fast these obstacles move toward Vibri, and the camera angle for a particular section of the song.</p>
+<p>When playing a custom CD, the game will select a random start time between <code>0x0</code> and <code>0x5D5DDB0</code>. The game then starts playing time segments in order from that starting position. If the CD has multiple tracks, each track will be assigned a random index in an array of start times.</p>
+<p>The custom CD track orders times segments in each table from lowest to highest difficulty. This means that a CD with several tracks can get a mix of easy and hard courses, but the difficulty may jump around between tracks.</p>
+<h3 id="header">Header</h3>
+<p>Starts at byte offset <code>0x00</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Offset</th>
+<th>Type</th>
+<th>Name</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x00</td>
+<td>uint32</td>
+<td>controlSegmentTableCount</td>
+<td>Number of tracks in the <a href="#control-segment-table">Control Segment Table</a>.</td>
+</tr>
+<tr>
+<td>0x04</td>
+<td>uint32</td>
+<td>patternSegmentTableCount</td>
+<td>Number of tracks in the <a href="#pattern-segment-table">Pattern Segment Table</a>.</td>
+</tr>
+<tr>
+<td>0x08</td>
+<td>uint32</td>
+<td>eventSegmentCount</td>
+<td>Number of tracks in the <a href="#event-segment-table">Event Segment Table</a>.</td>
+</tr>
+<tr>
+<td>0x0C</td>
+<td>uint32</td>
+<td>trackIndexTableCount</td>
+<td>Number of tracks in the <a href="#track-index-table">Track Index Table</a>.</td>
+</tr>
+<tr>
+<td>0x10</td>
+<td>uint32</td>
+<td>fixedPatternTableCount</td>
+<td>Number of entries in the <a href="#fixed-pattern-table">Fixed Pattern Table</a>.</td>
+</tr>
+<tr>
+<td>0x14</td>
+<td>uint32</td>
+<td>distributionPatternTableCount</td>
+<td>Number of entries in the <a href="#distribution-pattern-table">Distribution Pattern Table</a>.</td>
+</tr>
+<tr>
+<td>0x18</td>
+<td>uint32</td>
+<td>unk1</td>
+<td>Possibly number of standard tracks (6).</td>
+</tr>
+<tr>
+<td>0x1C</td>
+<td>uint32</td>
+<td>unk2</td>
+<td></td>
+</tr>
+<tr>
+<td>0x20</td>
+<td>uint32</td>
+<td>unk3</td>
+<td>Possibly number of custom CD tracks (1).</td>
+</tr>
+<tr>
+<td>0x24</td>
+<td>uint32[]</td>
+<td>unkArray</td>
+<td>Possibly array of indices for all tracks. Total size is <code>unk1</code> + <code>unk2</code> + <code>unk3</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="fixed-pattern-table">Fixed Pattern Table</h3>
+<p>Lookup table of obstacle patterns shared by all tracks. Each pattern plays in a fixed order and repeats while the current pattern segment is active. Starts at byte offset <code>0x40</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Offset</th>
+<th>Type</th>
+<th>Name</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x00</td>
+<td>FixedPattern[]</td>
+<td>patternArray</td>
+<td>Size is given by <code>Header.fixedPatternTableCount</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="fixedpattern"><code>FixedPattern</code></h4>
+<table>
+<thead>
+<tr>
+<th>Offset</th>
+<th>Type</th>
+<th>Name</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x00</td>
+<td>uint32</td>
+<td>count</td>
+<td></td>
+</tr>
+<tr>
+<td>0x04</td>
+<td>ObstacleEnum[]</td>
+<td>obstacleArray</td>
+<td>Each value corresponds to one obstacle in <a href="#obstacleenum"><code>ObstacleEnum</code></a></td>
+</tr>
+</tbody>
+</table>
+<h4 id="obstacleenum"><code>ObstacleEnum</code></h4>
+<style>
+.wm-page-content img {
+  margin: 0px 0px 0px 0px
+}
+</style>
+
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Obstacle</th>
+<th>Image</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x00</td>
+<td>Block</td>
+<td><img src="../../img/fsl/road0.png" title="Block" width=80px/></td>
+</tr>
+<tr>
+<td>0x01</td>
+<td>Pit</td>
+<td><img src="../../img/fsl/road1.png" title="Pit" width=80px/></td>
+</tr>
+<tr>
+<td>0x02</td>
+<td>Loop</td>
+<td><img src="../../img/fsl/road2.png" title="Loop" width=80px/></td>
+</tr>
+<tr>
+<td>0x03</td>
+<td>Wave</td>
+<td><img src="../../img/fsl/road3.png" title="Wave" width=80px/></td>
+</tr>
+<tr>
+<td>0x04</td>
+<td>Block + Pit</td>
+<td><img src="../../img/fsl/road4.png" title="Block + Pit" width=80px/></td>
+</tr>
+<tr>
+<td>0x05</td>
+<td>Block + Loop</td>
+<td><img src="../../img/fsl/road5.png" title="Block + Loop" width=80px/></td>
+</tr>
+<tr>
+<td>0x06</td>
+<td>Block + Wave</td>
+<td><img src="../../img/fsl/road6.png" title="Block + Wave" width=80px/></td>
+</tr>
+<tr>
+<td>0x07</td>
+<td>Pit + Loop</td>
+<td><img src="../../img/fsl/road7.png" title="Pit + loop" width=80px/></td>
+</tr>
+<tr>
+<td>0x08</td>
+<td>Pit + Wave</td>
+<td><img src="../../img/fsl/road8.png" title="Pit + Wave" width=80px/></td>
+</tr>
+<tr>
+<td>0x09</td>
+<td>Loop + Wave</td>
+<td><img src="../../img/fsl/road9.png" title="Loop + Wave" width=80px/></td>
+</tr>
+</tbody>
+</table>
+<h3 id="distribution-pattern-table">Distribution Pattern Table</h3>
+<p>Lookup table of obstacle patterns shared by all tracks. Each pattern sends obstacles in pseudo-random order. The pattern contains a fixed seed used to generate the sequence of obstacles. This ensures that the track plays the same way each time. Starts at byte offset <code>0xEC</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Offset</th>
+<th>Type</th>
+<th>Name</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x00</td>
+<td>DistributionPattern[]</td>
+<td>patternArray</td>
+<td>Size is given by <code>Header.distributionPatternTableCount</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="distributionpattern"><code>DistributionPattern</code></h4>
+<table>
+<thead>
+<tr>
+<th>Offset</th>
+<th>Type</th>
+<th>Name</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x00</td>
+<td>uint32</td>
+<td>count</td>
+<td>Always 1, except for the last pattern?</td>
+</tr>
+<tr>
+<td>0x04</td>
+<td>int32</td>
+<td>randomSeed</td>
+<td></td>
+</tr>
+<tr>
+<td>0x08</td>
+<td>int32</td>
+<td>maxProb</td>
+<td></td>
+</tr>
+<tr>
+<td>0x0C</td>
+<td>int32[]</td>
+<td>obstacleProb</td>
+<td>Array of 10 elements, one for each value in <a href="#obstacleenum"><code>ObstacleEnum</code></a></td>
+</tr>
+</tbody>
+</table>
+<p>The distribution is calculated as follows:</p>
+<ul>
+<li>For <code>i = 0</code> (Block), <code>P(0) = obstacleProb[0] / maxProb</code>.</li>
+<li>For <code>i &gt; 0</code>, <code>P(i) = (obstacleProb[i] - obstacleProb[i-1]) / maxProb</code></li>
+</ul>
+<p>For example, given <code>maxProb = 6</code> and <code>obstacleProb = [0, 0, 1, 2, 2, 2, 2, 4, 6, 6]</code>:</p>
+<ul>
+<li><code>P(Loop) = P(Wave) = 16.6667%</code></li>
+<li><code>P(Pit + Loop) = P(Pit + Wave) = 33.3333%</code></li>
+</ul>
+<h3 id="control-segment-table">Control Segment Table</h3>
+<p>Contains a list of time segments for each track. Each segment controls the speed of obstacles for a particular section of the track, as well as the minimum gap (a.k.a. "shadow period") between obstacles. Starts at byte offset <code>0xDB8</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Offset</th>
+<th>Type</th>
+<th>Name</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x00</td>
+<td>ControlSegmentTrack[]</td>
+<td>tracks</td>
+<td>Size is given by <code>Header.controlSegmentTableCount</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="controlsegmenttrack"><code>ControlSegmentTrack</code></h4>
+<p>Stores a list of control segments for a single track.</p>
+<table>
+<thead>
+<tr>
+<th>Offset</th>
+<th>Type</th>
+<th>Name</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x00</td>
+<td>uint32</td>
+<td>segmentCount</td>
+<td></td>
+</tr>
+<tr>
+<td>0x04</td>
+<td>ControlSegment[]</td>
+<td>segments</td>
+<td>Segments are sorted by <code>startTime</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="controlsegment"><code>ControlSegment</code></h4>
+<p>Each segment is <code>0x14</code> bytes in length.</p>
+<table>
+<thead>
+<tr>
+<th>Offset</th>
+<th>Type</th>
+<th>Name</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x00</td>
+<td>int32</td>
+<td>startTime</td>
+<td></td>
+</tr>
+<tr>
+<td>0x04</td>
+<td>int32</td>
+<td>baseSpeed</td>
+<td>Larger value = slower. Minimum value is <code>0x40</code> before the game crashes.</td>
+</tr>
+<tr>
+<td>0x08</td>
+<td>int32</td>
+<td>baseShadowPeriod</td>
+<td>Larger value = longer minimum gap between obstacles.</td>
+</tr>
+<tr>
+<td>0x0C</td>
+<td>int32</td>
+<td>deltaSpeed</td>
+<td></td>
+</tr>
+<tr>
+<td>0x10</td>
+<td>int32</td>
+<td>deltaShadowPeriod</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Both the obstacle speed and shadow period can gradually increase or decrease to match the speed of the song. Given a time value <code>t</code>, both are calculated as:</p>
+<ul>
+<li><code>speed = baseSpeed + (t - startTime) * deltaSpeed / 4096</code></li>
+<li><code>shadowPeriod = baseShadowPeriod + (t - startTime) * deltaShadowPeriod / 4096</code></li>
+</ul>
+<h3 id="pattern-segment-table">Pattern Segment Table</h3>
+<p>Contains a list of time segments that determine obstacle patterns for each track. Starts at byte offset <code>0x56CC</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Offset</th>
+<th>Type</th>
+<th>Name</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x00</td>
+<td>PatternSegmentTrack[]</td>
+<td>tracks</td>
+<td>Size is given by <code>Header.patternSegmentTableCount</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="patternsegmenttrack"><code>PatternSegmentTrack</code></h4>
+<p>Stores a list of pattern segments for a single track.</p>
+<table>
+<thead>
+<tr>
+<th>Offset</th>
+<th>Type</th>
+<th>Name</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x00</td>
+<td>uint32</td>
+<td>segmentCount</td>
+<td></td>
+</tr>
+<tr>
+<td>0x04</td>
+<td>PatternSegment[]</td>
+<td>segments</td>
+<td>Segments are sorted by <code>startTime</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="patternsegment"><code>PatternSegment</code></h4>
+<p>Each segment is <code>0x10</code> bytes in length.</p>
+<table>
+<thead>
+<tr>
+<th>Offset</th>
+<th>Type</th>
+<th>Name</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x00</td>
+<td>int32</td>
+<td>startTime</td>
+<td></td>
+</tr>
+<tr>
+<td>0x04</td>
+<td>int32</td>
+<td>unk</td>
+<td>Does not appear to be used in-game.</td>
+</tr>
+<tr>
+<td>0x08</td>
+<td>int32</td>
+<td>patternType</td>
+<td>0 = None (break)<br/>1 = Fixed pattern<br/>2 = Distribution pattern</td>
+</tr>
+<tr>
+<td>0x0C</td>
+<td>int32</td>
+<td>index</td>
+<td>Index into pattern table given by <code>patternType</code>.<br/>If -1, no pattern is active.</td>
+</tr>
+</tbody>
+</table>
+<p>A <code>patternType</code> of 0 indicates a break in the song. This triggers the camera to spin around Vibri.</p>
+<p>The custom CD track does not contain any break segments. Instead, the game will insert breaks into the song automatically.</p>
+<h3 id="event-segment-table">Event Segment Table</h3>
+<p>Contains a list of time segments that activate miscellaneous effects. Starts at byte offset <code>0x5EC8</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Offset</th>
+<th>Type</th>
+<th>Name</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x00</td>
+<td>EventSegmentTrack[]</td>
+<td>tracks</td>
+<td>Size is given by <code>Header.eventSegmentTableCount</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="eventsegmenttrack"><code>EventSegmentTrack</code></h4>
+<p>Stores a list of event segments for a single track.</p>
+<table>
+<thead>
+<tr>
+<th>Offset</th>
+<th>Type</th>
+<th>Name</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x00</td>
+<td>uint32</td>
+<td>segmentCount</td>
+<td></td>
+</tr>
+<tr>
+<td>0x04</td>
+<td>EventSegment[]</td>
+<td>segments</td>
+<td>Segments are sorted by <code>startTime</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="eventsegment"><code>EventSegment</code></h4>
+<p>Each segment is <code>0x18</code> bytes in length. Events may have durations that last shorter or longer than the current segment.</p>
+<table>
+<thead>
+<tr>
+<th>Offset</th>
+<th>Type</th>
+<th>Name</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x00</td>
+<td>int32</td>
+<td>startTime</td>
+<td></td>
+</tr>
+<tr>
+<td>0x04</td>
+<td>int32</td>
+<td>randomSpeedEventDuration</td>
+<td>See <a href="#random-speed-event">Random Speed Event</a>.</td>
+</tr>
+<tr>
+<td>0x08</td>
+<td>int32</td>
+<td>randomSpeedEventParam</td>
+<td>See <a href="#random-speed-event">Random Speed Event</a>.</td>
+</tr>
+<tr>
+<td>0x0C</td>
+<td>int32</td>
+<td>unusedDuration</td>
+<td>Always 0. Has no effect.</td>
+</tr>
+<tr>
+<td>0x10</td>
+<td>int32</td>
+<td>flipEventDuration</td>
+<td>See <a href="#flip-event">Flip Event</a>.</td>
+</tr>
+<tr>
+<td>0x14</td>
+<td>int32</td>
+<td>cameraEvent</td>
+<td>Index = <code>cameraEvent % 10</code><br/>Loop count = <code>cameraEvent / 10</code><br/>See <a href="#camera-event">Camera Event</a>.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="random-speed-event">Random Speed Event</h5>
+<p>Sends obstacles at random speeds. Similar to <code>ControlSegment</code>, a higher speed value indicates a slower obstacle. This effect changes depending on the value of <code>randomSpeedEventParam</code>:</p>
+<ul>
+<li><code>0x02</code>: Select a random speed using <code>startTime</code> as the seed for the first obstacle. Probabilities are: <code>P(0x8000) = P(0x14000) = 30%, P(0xAAAA) = 40%</code></li>
+<li><code>0x03</code>: Select a random speed using <code>startTime</code> as the seed for the first obstacle. Probabilities are: <code>P(0x8000) = P(0x14000) = 50%</code></li>
+<li><code>0x16</code>: Cycle speeds between <code>0x8000</code> -&gt; <code>0x14000</code> -&gt; ...</li>
+<li><code>default</code>: Cycle speeds between <code>0xAAAA</code> -&gt; <code>0x8000</code> -&gt; <code>0x14000</code> -&gt; ...</li>
+</ul>
+<h5 id="flip-event">Flip Event</h5>
+<p>Spawns obstacles upside-down that flip into place as they approach Vibri.</p>
+<h5 id="camera-event">Camera Event</h5>
+<p>Sets the camera angle for the segment. The camera index points to an <a href="../anc/">.ANC</a> file in the "GAME/*_FILES.PAK/ROAD/" folder. Possible values are:</p>
+<table>
+<thead>
+<tr>
+<th>Camera Index</th>
+<th>Camera Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x01</td>
+<td>B01</td>
+</tr>
+<tr>
+<td>0x02</td>
+<td>B02</td>
+</tr>
+<tr>
+<td>0x03</td>
+<td>S01</td>
+</tr>
+<tr>
+<td>0x04</td>
+<td>S02</td>
+</tr>
+<tr>
+<td>0x05</td>
+<td>F01</td>
+</tr>
+<tr>
+<td>0x06</td>
+<td>F02</td>
+</tr>
+<tr>
+<td>0x07</td>
+<td>F03</td>
+</tr>
+</tbody>
+</table>
+<p>The camera loop count determines the speed of the camera animation. A higher value indicates a faster playback speed.</p>
+<h3 id="track-index-table">Track Index Table</h3>
+<p>Assigns a control, pattern, and event segment table index to each track. Starts at byte offset <code>0x68D4</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Offset</th>
+<th>Type</th>
+<th>Name</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x00</td>
+<td>TrackIndexEntry[]</td>
+<td>entries</td>
+<td>Size is given by <code>Header.trackIndexTableCount</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="trackindexentry"><code>TrackIndexEntry</code></h4>
+<p>Each entry is <code>0x0C</code> bytes in length.</p>
+<table>
+<thead>
+<tr>
+<th>Offset</th>
+<th>Type</th>
+<th>Name</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x00</td>
+<td>uint32</td>
+<td>controlSegmentIndex</td>
+<td>Index into the <a href="#control-segment-table">Control Segment Table</a>.</td>
+</tr>
+<tr>
+<td>0x04</td>
+<td>uint32</td>
+<td>patternSegmentIndex</td>
+<td>Index into the <a href="#pattern-segment-table">Pattern Segment Table</a>.</td>
+</tr>
+<tr>
+<td>0x08</td>
+<td>uint32</td>
+<td>eventSegmentIndex</td>
+<td>Index into the <a href="#event-segment-table">Event Segment Table</a>.</td>
+</tr>
+</tbody>
+</table>
 
   <br>
     
