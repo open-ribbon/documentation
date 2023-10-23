@@ -11,7 +11,7 @@
     
     <link rel="shortcut icon" href="../../img/favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>_sn_cpp_structors() - Open-Ribbon's Vib-Ribbon Technical Database</title>
+    <title>General Info - Open-Ribbon's Vib-Ribbon Technical Database</title>
     <link href="../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
     <link href="../../css/font-awesome-4.7.0.css" rel="stylesheet">
     <link href="../../css/base.css" rel="stylesheet">
@@ -32,7 +32,11 @@
       var is_top_frame = false;
         
         var pageToc = [
-          {title: "_sn_cpp_structors()", url: "#_top", children: [
+          {title: "General Info", url: "#_top", children: [
+              {title: "SCPS_180.12", url: "#scps_18012" },
+              {title: "MAIN_T.EXE", url: "#main_texe" },
+              {title: "MAIN_K.EXE", url: "#main_kexe" },
+              {title: "MAIN_G.EXE", url: "#main_gexe" },
           ]},
         ];
 
@@ -59,12 +63,12 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="../main_t/globals/" class="btn btn-xs btn-default pull-right">
+      <a href="../../file-types/intro/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="../main_t/globals/" class="btn btn-xs btn-link">
-        Globals
+      <a href="../../file-types/intro/" class="btn btn-xs btn-link">
+        Introduction to File Types
       </a>
     </div>
     
@@ -80,33 +84,24 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 
     
 
-    <h1 id="_sn_cpp_structors">_sn_cpp_structors()</h1>
-<p>Within main executables, there exists a method that initializes objects of classes, which is called a <strong>constructor.</strong> These constructors will be called for object creation. <em>Names for these are not yet finalized as some of them still read "UnkCtor"</em></p>
-<pre><code>FontHack__Ctor
-FileSys__Ctor
-TmdLineObj__Ctor
-Movie__Ctor
-InputSys__Ctor
-UnkCtor00
-UnkCtor01
-UnkCtor02
-UnkCtor03
-UnkCtor04
-</code></pre>
-<p>The procedure for getting all of these initialized is to make all the objects needed immediately or at least as soon as possible. The way that vib-ribbon takes care of this is to make an array <code>_CTOR_LIST__</code> with all of the above constructors. The <code>_sn_cpp_structors()</code> is then run inside <code>start()</code>.</p>
-<pre><code>void __fastcall _sn_cpp_structors(int sectionobj, int sectionobj_end)
-{
-  void (**ctor)(void);
-
-  // Iterate through every entry in the _CTOR_LIST__ array.
-  for ( ctor = (void (**)(void))sectionobj; (int)ctor &lt; sectionobj_end; ++ctor )
-  {
-    // Run constructor inside its respective class. 
-    if ( *ctor )
-      (*ctor)();
-  }
-}
-</code></pre>
+    <h1 id="general-info">General Info</h1>
+<p><em>Written by <a href="https://github.com/polybiusproxy">polyproxy</a></em></p>
+<p>It is well known that Vib-Ribbon's main gimmick was that you could swap out the original PlayStation game disc with your own CDs and the game would generate levels out of the CD's audio tracks.<br>
+For this reason, the game had to be small enough to fit in the PlayStation's tiny RAM (2 MB)<br></p>
+<p>In order to do this, the game is separated in four executables, <strong>SCPS_180.12</strong>, <strong>MAIN_T.EXE</strong>, <strong>MAIN_K.EXE</strong> and <strong>MAIN_G.EXE</strong>.<br>
+According to the PsyQ SDK, these executables are internally called <strong>modules</strong>.</p>
+<h2 id="scps_18012">SCPS_180.12</h2>
+<p><strong>SCPS_180.12</strong> (named <strong>SCES_028.73</strong> on the PAL release, <strong>loader.exe</strong> on the PlayStation Magazine demo) is the main executable ran when the Vib-Ribbon disc is inserted (first boot).</p>
+<p>This executable, when ran, searches for the executable to run on an array (<strong>MAIN_T.EXE</strong> by default), searches for it on the disc, and then runs it. When said executable finishes execution, control is passed back to <strong>SCPS_180.12</strong>, which then runs the next executable on the array.</p>
+<h2 id="main_texe">MAIN_T.EXE</h2>
+<p><strong>MAIN_T.EXE</strong> is the executable in charge of the title screen.</p>
+<p>The <strong>T</strong> suffix stands for <strong>TITLE</strong>.</p>
+<h2 id="main_kexe">MAIN_K.EXE</h2>
+<p><strong>MAIN_K.EXE</strong> is the executable in charge of the <code>HOW TO PLAY</code> level.</p>
+<p>The <strong>K</strong> suffix stands for <strong>KIOSK</strong>. It is not known what <code>KIOSK</code> means in this case.</p>
+<h2 id="main_gexe">MAIN_G.EXE</h2>
+<p><strong>MAIN_G.EXE</strong> is the executable in charge of the game's main menu (the course selection, high scores, settings) and gameplay.</p>
+<p>The <strong>G</strong> suffix stands for <strong>GAME</strong>.</p>
 
   <br>
     
@@ -119,12 +114,12 @@ UnkCtor04
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="../main_t/globals/" class="btn btn-xs btn-default pull-right">
+      <a href="../../file-types/intro/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="../main_t/globals/" class="btn btn-xs btn-link">
-        Globals
+      <a href="../../file-types/intro/" class="btn btn-xs btn-link">
+        Introduction to File Types
       </a>
     </div>
     
