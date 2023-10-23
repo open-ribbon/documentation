@@ -7,16 +7,7 @@ If you want to help us research the game, and even reverse engineer, you will ne
 * A disassembler (IDA Pro or Ghidra is recommended)
 
 ### Instructions for Ghidra
-You will need **Ghidra 10.3.1** specifically, as any other version is either confirmed or speculated not to work. A plugin is also needed to read PSX binaries, which can be found [here](https://github.com/lab313ru/ghidra_psx_ldr/releases/tag/v6.7). After you have extracted the archive, open Ghidra, navigate to `File -> Install Extensions` in the main menu, and install the extension.
-
-### Instructions for IDA Pro
-(WIP)
-
-* Obtain the IDB file
-* Install the psyq plugin
-* Ignore `"psyq450: dir not found"` error
-
-
+You will need **[Ghidra 10.3.1](https://github.com/NationalSecurityAgency/ghidra/releases/tag/Ghidra_10.3.1_build)** specifically. An extension is also needed to load PSX binaries, which can be found [here](https://github.com/lab313ru/ghidra_psx_ldr/releases/tag/v6.7). After you have extracted the archive, open Ghidra, navigate to `File -> Install Extensions` in the main menu, and install the extension. Then, restart Ghidra.
 
 ## How to extract PAK files
 You will need a tool called VibRipper, which can be found in [this GitHub repository](https://github.com/resistiv/VibRipper/), courtesy of Resistiv. To use this tool, the executable will need to be placed in the same folder or directory as the PAK file you want to extract.

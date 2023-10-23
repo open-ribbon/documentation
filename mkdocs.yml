@@ -19,9 +19,7 @@ nav:
 - Decompilation:
   - File Extraction: "decompilation/file-ext.md"
   - Resources and Setup: "decompilation/resources.md"
-  - _sn_cpp_structors(): "decompilation/_sn_cpp_structors.md"
-  - MAIN_T.EXE:
-    - Globals: "decompilation/main_t/globals.md"
+  - General Info: "decompilation/general-info.md"
 - File Types:
   - Introduction to File Types: "file-types/intro.md"
   - ANC - Camera Animation: "file-types/anc.md"
